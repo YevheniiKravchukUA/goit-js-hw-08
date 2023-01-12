@@ -9,20 +9,23 @@ const { form, emailInp, messageInp } = refs;
 const userFormData = {};
 
 // set form data from LocaleStorage
+try {
+  if (localStorage.getItem('feedback-form-state')?.includes('email')) {
+    emailInp.value = JSON.parse(
+      localStorage.getItem('feedback-form-state')
+    ).email;
 
-if (localStorage.getItem('feedback-form-state')?.includes('email')) {
-  emailInp.value = JSON.parse(
-    localStorage.getItem('feedback-form-state')
-  ).email;
+    userFormData.email = emailInp.value;
+  }
+  if (localStorage.getItem('feedback-form-state')?.includes('message')) {
+    messageInp.value = JSON.parse(
+      localStorage.getItem('feedback-form-state')
+    ).message;
 
-  userFormData.email = emailInp.value;
-}
-if (localStorage.getItem('feedback-form-state')?.includes('message')) {
-  messageInp.value = JSON.parse(
-    localStorage.getItem('feedback-form-state')
-  ).message;
-
-  userFormData.message = messageInp.value;
+    userFormData.message = messageInp.value;
+  }
+} catch (error) {
+  console.log(`TryCatch error name: ${error.name}`);
 }
 
 // event callbacks
