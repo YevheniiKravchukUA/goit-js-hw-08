@@ -6,7 +6,7 @@ const refs = {
   messageInp: document.querySelector('.feedback-form textarea[name=message]'),
 };
 const { form, emailInp, messageInp } = refs;
-const userFormData = {};
+let userFormData = {};
 
 // set form data from LocaleStorage
 try {
@@ -44,6 +44,7 @@ function onFormSubmit(e) {
   });
 
   e.target.reset();
+  userFormData = {};
   localStorage.removeItem('feedback-form-state');
 }
 
